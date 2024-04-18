@@ -1,4 +1,5 @@
 # dependencies
+langchain-fireworks
 beautifulsoup4
 colorama
 duckduckgo_search
