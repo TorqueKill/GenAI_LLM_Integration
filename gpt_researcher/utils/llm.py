@@ -27,6 +27,9 @@ def get_provider(llm_provider):
         case "google":
             from ..llm_provider import GoogleProvider
             llm_provider = GoogleProvider
+        case "fireworks":
+            from ..llm_provider import FireworksAIProvider
+            llm_provider = FireworksAIProvider
 
         case _:
             raise Exception("LLM provider not found.")
@@ -76,6 +79,12 @@ async def create_chat_completion(
         response = await provider.get_chat_response(
             messages, stream, websocket
         )
+        #if response, save response in file
+        with open('output.txt', 'a') as f:
+                f.write(str(response)+"\n")
+        #also save passed args
+        with open('args.txt', 'a') as f:
+            f.write(str(llm_provider) + " " + str(messages)+"\n")
         return response
 
     logging.error("Failed to get response from OpenAI API")

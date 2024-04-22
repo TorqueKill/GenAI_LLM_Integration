@@ -19,6 +19,9 @@ class Memory:
             case "huggingface":
                 from langchain.embeddings import HuggingFaceEmbeddings
                 _embeddings = HuggingFaceEmbeddings()
+            case "fireworks":
+                from langchain_fireworks import FireworksEmbeddings
+                _embeddings = FireworksEmbeddings(api_key=os.environ["FIREWORKS_API_KEY"])
 
             case _:
                 raise Exception("Embedding provider not found.")
